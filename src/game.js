@@ -2,50 +2,50 @@ let dom = {
 	// Misc
 	alertPosition:					"alert-position",
 	// Base
-	houseEdge:			"house_edge",
-	balance:			"balance",
-	betsize:			"bet_size",
-	payout:				"payout",
+	houseEdge:						"house_edge",
+	balance:						"balance",
+	betsize:						"bet_size",
+	payout:							"payout",
 	// On win
 	onWinReturnToBase_RadioBtn: 	"rad_onwin_return_to_base",
-	onWinIncBetBy_RadioBtn:		"rad_onwin_inc_bet_by",
-	onWinIncBetBy:			"onwin_inc_bet_by",
-	onWinDecBetBy_RadioBtn:		"rad_onwin_dec_bet_by",
-	onWinDecBetBy:			"onwin_dec_bet_by",
+	onWinIncBetBy_RadioBtn:			"rad_onwin_inc_bet_by",
+	onWinIncBetBy:					"onwin_inc_bet_by",
+	onWinDecBetBy_RadioBtn:			"rad_onwin_dec_bet_by",
+	onWinDecBetBy:					"onwin_dec_bet_by",
 	// On loss
 	onLossReturnToBase_RadioBtn:	"rad_onloss_return_to_base",
-	onLossIncBetBy_RadioBtn:	"rad_onloss_inc_bet_by",
-	onLossIncBetBy:			"onloss_inc_bet_by",
-	onLossDecBetBy_RadioBtn:	"rad_onloss_dec_bet_by",
-	onLossDecBetBy:			"onloss_dec_bet_by",
+	onLossIncBetBy_RadioBtn:		"rad_onloss_inc_bet_by",
+	onLossIncBetBy:					"onloss_inc_bet_by",
+	onLossDecBetBy_RadioBtn:		"rad_onloss_dec_bet_by",
+	onLossDecBetBy:					"onloss_dec_bet_by",
 	// To win
-	rollover_RadioBtn:		"rad_toWin_roll_over",
-	rollover:			"towin_roll_over_val",
-	rollunder_RadioBtn:		"rad_toWin_roll_under",
-	rollunder:			"towin_roll_under_val",
+	rollover_RadioBtn:				"rad_toWin_roll_over",
+	rollover:						"towin_roll_over_val",
+	rollunder_RadioBtn:				"rad_toWin_roll_under",
+	rollunder:						"towin_roll_under_val",
 	// Limit
-	numRolls:			"limit_num_rolls_val",
-	balHigher:			"limit_stop_if_bal_heigher_val",
-	balLower:			"limit_stop_if_bal_lower_val",
-	maxBetsize:			"limit_max_bet_size_val",
+	numRolls:						"limit_num_rolls_val",
+	balHigher:						"limit_stop_if_bal_heigher_val",
+	balLower:						"limit_stop_if_bal_lower_val",
+	maxBetsize:						"limit_max_bet_size_val",
 }
 
 
 let config = {
 	minHouseEdge:	0.1,
 	maxHouseEdge:	3.0,
-	minBalance:	0.00000001,
-	maxBalance:	10000.0,
-	minBetsize:	0.00000001,
-	maxBetsize:	1000,
-	minPayout:	1.02,
-	maxPayout:	1002.0,
+	minBalance:		0.00000001,
+	maxBalance:		10000.0,
+	minBetsize:		0.00000001,
+	maxBetsize:		1000,
+	minPayout:		1.02,
+	maxPayout:		1002.0,
 	minIncDecBet:	0,
 	maxIncDecBet:	10000,
-	minRolls:	1,
-	maxRolls:	200000,
-	minStopBal:	0,
-	maxStopBal:	10000,
+	minRolls:		1,
+	maxRolls:		200000,
+	minStopBal:		0,
+	maxStopBal:		10000,
 	minMaxBetsize:	0,
 	maxMaxBetsize:	100	
 }
@@ -217,6 +217,7 @@ class GameHandler
 			raiseAlert("Balance must be greater or equal to bet size.", dom.alertPosition)
 			return false;
 		}
+			
 
 		return true;
 		
