@@ -261,28 +261,32 @@ class GameHandler
 				}
 			}
 
-			if(isWin == true)
+			if(this._rollsMade > 0)
 			{
-				balance = parseFloat((balance + betsize * payout).toFixed(8));
+				if(isWin == true)
+				{
+					balance = parseFloat((balance + betsize * payout).toFixed(8));
 
-				// Update statistic
-				roundsLostInARow = 0;
-				roundsWonInARow += 1;
+					// Update statistic
+					roundsLostInARow = 0;
+					roundsWonInARow += 1;
 
-				if(roundsWonInARow > this._longestWinStreak)
-					this._longestWinStreak = roundsWonInARow;	
+					if(roundsWonInARow > this._longestWinStreak)
+						this._longestWinStreak = roundsWonInARow;	
+				}
+				else
+				{
+					// Update statistic
+					roundsWonInARow = 0;
+					roundsLostInARow += 1;
+
+					if(roundsLostInARow > this._longestLoseStreak)
+						this._longestLoseStreak = roundsLostInARow;
+				}
+			
+				this._chartData.push(parseFloat((balance).toFixed(8)));
+				betsize = this._updateBetSize(isWin, betsize, baseBetSize);
 			}
-			else
-			{
-				// Update statistic
-				roundsWonInARow = 0;
-				roundsLostInARow += 1;
-
-				if(roundsLostInARow > this._longestLoseStreak)
-					this._longestLoseStreak = roundsLostInARow;
-			}
-			this._chartData.push(parseFloat((balance).toFixed(8)));
-			betsize = this._updateBetSize(isWin, betsize, baseBetSize);
 		}
 		document.getElementById(dom.balance).value = parseFloat(balance.toFixed(8));
 		this._profit = balance - this._startBalance;
