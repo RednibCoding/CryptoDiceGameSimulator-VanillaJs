@@ -9,7 +9,7 @@ let dom = {
 	onWinIncBetBy_RadioBtn:		"rad_onwin_inc_bet_by",
 	onWinIncBetBy:			"onwin_inc_bet_by",
 	onWinDecBetBy_RadioBtn:		"rad_onwin_dec_bet_by",
-	onWinDecBetBy:				"onwin_dec_bet_by",
+	onWinDecBetBy:			"onwin_dec_bet_by",
 	// On loss
 	onLossReturnToBase_RadioBtn:	"rad_onloss_return_to_base",
 	onLossIncBetBy_RadioBtn:	"rad_onloss_inc_bet_by",
