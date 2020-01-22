@@ -1,4 +1,6 @@
 let dom = {
+	// Misc
+	alertPosition:					"alert-position",
 	// Base
 	houseEdge:						"house_edge",
 	balance:						"balance",
@@ -60,6 +62,31 @@ function calculateRollOverValue(multiplier, houseEdge)
 	let result = calculateRollUnderValue(multiplier, houseEdge)
 	result = (99.999-result).toFixed(3);
 	return result;
+}
+
+// Alert
+function raiseAlert(text, parentId)
+{
+	let div = document.createElement("div");
+	div.setAttribute("class", "alert alert-danger alert-dismissible fade show");
+	div.textContent = text;
+	
+	let btn = document.createElement("button");
+	btn.setAttribute("type", "button");
+	btn.setAttribute("class", "close");
+	btn.setAttribute("data-dismiss", "alert");
+	btn.setAttribute("aria-label", "Close");
+
+	div.appendChild(btn);
+
+	let domPosition = document.getElementById(parentId);
+	domPosition.appendChild(div);
+}
+
+function dismissAlerts(parentId)
+{
+	let domPosition = document.getElementById(parentId);
+	domPosition.innerHTML = null;
 }
 
 
@@ -142,50 +169,52 @@ class GameHandler
 
 	isValidStartCondition()
 	{
+		dismissAlerts(dom.alertPosition);
+
 		let balance = document.getElementById(dom.balance).value;
 		let betsize = document.getElementById(dom.betsize).value;
 
 		if(document.getElementById(dom.houseEdge).value === "")
-			{alert("House edge can not be empty."); return false;}
+			{raiseAlert("House edge can not be empty.", dom.alertPosition); return false;}
 		if(document.getElementById(dom.balance).value === "")
-			{alert("Balance can not be empty."); return false;}
+			{raiseAlert("Balance can not be empty.", dom.alertPosition); return false;}
 		if(document.getElementById(dom.betsize).value === "")
-			{alert("Betsize can not be empty."); return false;}
+			{raiseAlert("Betsize can not be empty.", dom.alertPosition); return false;}
 		if(document.getElementById(dom.payout).value === "")
-			{alert("Payout can not be empty."); return false;}
+			{raiseAlert("Payout can not be empty.", dom.alertPosition); return false;}
 		if(document.getElementById(dom.numRolls).value === "")
-			{alert("Number of rolls can not be empty."); return false;}
+			{raiseAlert("Number of rolls can not be empty.", dom.alertPosition); return false;}
 		if(document.getElementById(dom.balHigher).value === "")
-			{alert("Stop if balance is heiger can not be empty."); return false;}
+			{raiseAlert("Stop if balance is heiger can not be empty.", dom.alertPosition); return false;}
 		if(document.getElementById(dom.balLower).value === "")
-			{alert("Stop if balance is lower can not be empty."); return false;}
+			{raiseAlert("Stop if balance is lower can not be empty.", dom.alertPosition); return false;}
 		if(document.getElementById(dom.maxBetsize).value === "")
-			{alert("Max betsize can not be empty."); return false;}
+			{raiseAlert("Max betsize can not be empty.", dom.alertPosition); return false;}
 
 		if(document.getElementById(dom.onWinIncBetBy_RadioBtn).checked)
 		{
 			if(document.getElementById(dom.onWinIncBetBy).value === "")
-			{alert("On win increase bet by can not be empty."); return false;}
+			{raiseAlert("On win increase bet by can not be empty.", dom.alertPosition); return false;}
 		}
 		if(document.getElementById(dom.onWinDecBetBy_RadioBtn).checked)
 		{
 			if(document.getElementById(dom.onWinDecBetBy).value === "")
-			{alert("On win decrease bet by can not be empty."); return false;}
+			{raiseAlert("On win decrease bet by can not be empty.", dom.alertPosition); return false;}
 		}
 		if(document.getElementById(dom.onLossIncBetBy_RadioBtn).checked)
 		{
 			if(document.getElementById(dom.onLossIncBetBy).value === "")
-			{alert("On loss increase bet by can not be empty."); return false;}
+			{raiseAlert("On loss increase bet by can not be empty.", dom.alertPosition); return false;}
 		}
 		if(document.getElementById(dom.onLossDecBetBy_RadioBtn).checked)
 		{
 			if(document.getElementById(dom.onLossDecBetBy).value === "")
-			{alert("On loss decrease bet by can not be empty."); return false;}
+			{raiseAlert("On loss decrease bet by can not be empty.", dom.alertPosition); return false;}
 		}
 
 		if(balance < betsize)
 		{
-			alert("Balance must be greater or equal to bet size.")
+			raiseAlert("Balance must be greater or equal to bet size.", dom.alertPosition)
 			return false;
 		}
 			
@@ -233,32 +262,47 @@ class GameHandler
 		{
 			
 
-			if( balance >= betsize &&
-				balance < stopBalHigher &&
-				balance > stopBalLower &&
-				betsize <= maxBetSize)
+			if(balance < betsize)
 			{
-				rndNum = parseFloat((Math.random() * 100).toFixed(3));
-				balance -= parseFloat((betsize).toFixed(8));
-				this._rollsMade += 1;
+				raiseAlert("Stopped: Bet size is greater then balance.", dom.alertPosition);
+				break;
+			}
+			if(balance > stopBalHigher)
+			{
+				raiseAlert("Stopped: Balance is heigher than limit.", dom.alertPosition);
+				break;
+			}
+			if(balance < stopBalLower)
+			{
+				raiseAlert("Stopped: Balance is lower than limit.", dom.alertPosition);
+				break;
+			}
+			if(betsize > maxBetSize)
+			{
+				raiseAlert("Stoppen: Bet size is greater than maximum bet size.", dom.alertPosition);
+				break;
+			}
 
-				if(betsize > this._highestBet)
-					this._highestBet = parseFloat(betsize.toFixed(8));
+			rndNum = parseFloat((Math.random() * 100).toFixed(3));
+			balance -= parseFloat((betsize).toFixed(8));
+			this._rollsMade += 1;
 
-				if(document.getElementById(dom.rollover_RadioBtn).checked)
-				{
-					if(rndNum >= rollOver) // win
-						isWin = true;
-					else // loss
-						isWin = false;
-				}
-				else if(document.getElementById(dom.rollunder_RadioBtn).checked)
-				{
-					if(rndNum <= rollUnder) // win
-						isWin = true;
-					else // loss
-						isWin = false;
-				}
+			if(betsize > this._highestBet)
+				this._highestBet = parseFloat(betsize.toFixed(8));
+
+			if(document.getElementById(dom.rollover_RadioBtn).checked)
+			{
+				if(rndNum >= rollOver) // win
+					isWin = true;
+				else // loss
+					isWin = false;
+			}
+			else if(document.getElementById(dom.rollunder_RadioBtn).checked)
+			{
+				if(rndNum <= rollUnder) // win
+					isWin = true;
+				else // loss
+					isWin = false;
 			}
 
 			if(this._rollsMade > 0)
