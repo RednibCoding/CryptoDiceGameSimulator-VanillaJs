@@ -13,29 +13,6 @@ body {
 	margin-right: 1.2rem;
 }
 
-.main-wrapper {
-	display: flex;
-	width: 100%;
-}
-
-.left-wrapper
-{
-	margin: auto;
-	width: 60%;
-}
-
-.right-wrapper
-{
-	margin: auto;
-	width: 40%;
-}
-
-.inner-wrapper {
-	display: flex;
-	margin: auto;
-	width: 100%;
-}
-
 .navbar-card {
 	border-radius: 5px;
 }

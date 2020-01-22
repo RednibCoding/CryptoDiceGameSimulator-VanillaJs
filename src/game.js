@@ -362,7 +362,7 @@ class GameHandler
 	createChart()
 	{
 		// Returns an array with numbers between start and end
-		// Step takes only every nth element
+		// Step: take only every nth element
 		function range(start, end, step = 1) {
 			const len = Math.floor((end - start) / step) + 1
 			return Array(len).fill().map((_, idx) => start + (idx * step))
@@ -379,22 +379,24 @@ class GameHandler
 		let step = Math.floor(this._chartData.length / 100);
 		if(this._chartData.length < 100) {step = 1};
 		let reducedRange = range(1, this._chartData.length, step);
-		// Make sure the arrey contains the last element
+		// Make sure the last element of the reduced array contains the last element
+		// of original array
 		// Otherwise the chart would be misleading
 		reducedRange[reducedRange.length-1] = this._chartData.length;
 
 		let reducedArray = resize(this._chartData, step);
-		// Make sure the arrey contains the last element
+		// Make sure the last element of the resized array contains the last element
+		// of original array
 		// Otherwise the chart would be misleading
 		reducedArray[reducedArray.length-1] = this._chartData[this._chartData.length-1];
 
 		var ctx = document.getElementById('chart').getContext('2d');
 		this._chart = new Chart(ctx,
 		{
-			// The type of chart we want to create
+			// The type of chart
 			type: 'line',
 
-			// The data for our dataset
+			// The data for the dataset
 			data: {
 				labels: reducedRange,
 				datasets: [{
@@ -404,7 +406,7 @@ class GameHandler
 				}]
 			},
 
-			// Configuration options go here
+			// Configuration options
 			options: {
 				responsive: true,
     			maintainAspectRatio: false
