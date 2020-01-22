@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crypto Dice Game Simulator</title>
+		<link rel="shortcut icon" type="image/x-icon" href="image/BTC.png">
+
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="src/styles.css" />
+	</head>
+
+	<body>
+		<nav class="navbar navbar-dark">
+			<a class="navbar-brand" href="#">
+				<img src="image/BTC.png" width="60" height="60" class="d-inline-block align-center" alt="">
+				Crypto Dice Game Simulator
+			</a>
+			<div class="navbar-brand" href="#">
+				<form class="form-inline">
+					Balance:
+					<input
+						class="form-control navbar-input"
+						type="number"
+						placeholder="Enter Balance"
+						id="balance"
+						onchange="onBalanceChange(this)"
+					/>
+					House's edge:
+					<input
+						class="form-control navbar-input"
+						type="number"
+						placeholder="House's edge"
+						id="house_edge"
+						onchange="onHouseEdgeChange(this)"
+					/>
+				</form>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+
+					<!-- Base bet size -->
+					<div class="card">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">Base bet size</span>
+						</nav>
+						<div class="input-group">
+							<input
+								type="number"
+								id="bet_size"
+								class="form-control input-box"
+								placeholder="Bet size"
+								onchange="onBetsizeChange(this)"
+							/>
+							<div class="input-group-append">
+							<span class="input-group-text">BTC</span>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<div class="col">
+
+					<!-- Payout -->
+					<div class="card">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">Payout</span>
+						</nav>
+						<div class="input-group">
+							<input
+								type="number"
+								id="payout"
+								class="form-control input-box"
+								placeholder="Payout"
+								onchange="onPayoutChange(this)"
+							/>
+							<div class="input-group-append">
+							<span class="input-group-text">X</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+
+					<!-- On win -->
+					<div class="card">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">On win</span>
+						</nav>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_onwin_return_to_base"
+									name="onwin-radio"
+									checked="checked"
+								/>
+								</div>
+							</div>
+							<div class="input-group-append">
+								<span class="input-group-text">Return to base</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_onwin_inc_bet_by"
+									name="onwin-radio"
+								/>
+								</div>
+							</div>
+							<div class="input-group-prepend">
+								<span class="input-group-text">Increase bet by</span>
+							</div>
+							<input
+								type="number"
+								id="onwin_inc_bet_by"
+								class="form-control input-box"
+								onchange="onIncDecBetChange(this)"
+							/>
+							<div class="input-group-append">
+								<span class="input-group-text">%</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_onwin_dec_bet_by"
+									name="onwin-radio"
+								/>
+								</div>
+							</div>
+							<div class="input-group-prepend">
+								<span class="input-group-text">Decrease bet by</span>
+							</div>
+							<input
+								type="number"
+								id="onwin_dec_bet_by"
+								class="form-control input-box"
+								onchange="onIncDecBetChange(this)"
+							/>
+							<div class="input-group-append">
+								<span class="input-group-text">%</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+
+					<!-- On loss -->
+					<div class="card">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">On loss</span>
+						</nav>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_onloss_return_to_base"
+									name="onloss-radio"
+									checked="checked"
+								/>
+								</div>
+							</div>
+							<div class="input-group-append">
+								<span class="input-group-text" style="width: 100%">Return to base</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_onloss_inc_bet_by"
+									name="onloss-radio"
+								/>
+								</div>
+							</div>
+							<div class="input-group-prepend">
+								<span class="input-group-text">Increase bet by</span>
+							</div>
+							<input
+								type="number"
+								id="onloss_inc_bet_by"
+								class="form-control input-box"
+								onchange="onIncDecBetChange(this)"
+							/>
+							<div class="input-group-append">
+								<span class="input-group-text">%</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_onloss_dec_bet_by"
+									name="onloss-radio"
+								/>
+								</div>
+							</div>
+							<div class="input-group-prepend">
+								<span class="input-group-text">Decrease bet by</span>
+							</div>
+							<input
+								type="number"
+								id="onloss_dec_bet_by"
+								class="form-control input-box"
+								onchange="onIncDecBetChange(this)"
+							/>
+							<div class="input-group-append">
+								<span class="input-group-text">%</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+
+					<!-- To win -->
+					<div class="card">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">To win</span>
+						</nav>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_toWin_roll_over"
+									name="towin-radio"
+									checked="checked"
+								/>
+								</div>
+							</div>
+							<div class="input-group-append">
+								<span class="input-group-text" style="width: auto">Roll over</span>
+								<span
+									class="input-group-text"
+									style="width: auto"
+									id="towin_roll_over_val">50.000
+								</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+								<input
+									type="radio"
+									id="rad_toWin_roll_under"
+									name="towin-radio"
+								/>
+								</div>
+							</div>
+							<div class="input-group-append">
+								<span class="input-group-text" style="width: auto">Roll under</span>
+								<span
+									class="input-group-text"
+									style="width: auto"
+									id="towin_roll_under_val">50.000
+								</span>
+							</div>
+						</div>
+					</div>
+					<!-- Button start -->
+					<div class="card">
+						<button type="button" id="btn_start" onclick="onStart()" class="btn button">Start</button>
+					</div>
+				</div>
+				<div class="col">
+
+					<!-- Limit -->
+					<div class="card">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">Limit</span>
+						</nav>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" style="width: auto">Number of rolls</span>
+							</div>
+							<input
+								type="number"
+								id="limit_num_rolls_val"
+								class="form-control input-box"
+								onchange="onNumRollsChange(this)"
+							/>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="">Stop if balance is higher</span>
+							</div>
+							<input
+								type="number"
+								id="limit_stop_if_bal_heigher_val"
+								class="form-control input-box"
+								onchange="onStopIfBalHigherLowerChange(this)"
+							/>
+							<div class="input-group-append">
+								<span class="input-group-text">BTC</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Stop if balance is lower</span>
+							</div>
+							<input
+								type="number"
+								id="limit_stop_if_bal_lower_val"
+								class="form-control input-box"
+								onchange="onStopIfBalHigherLowerChange(this)"
+							/>
+							<div class="input-group-append">
+								<span class="input-group-text">BTC</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Maximum bet size</span>
+							</div>
+							<input
+								type="number"
+								id="limit_max_bet_size_val"
+								class="form-control input-box"
+								onchange="onMaxBetsizeChange(this)"
+							/>
+							<div class="input-group-append">
+								<span class="input-group-text">BTC</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col">
+					<!-- Statistic table -->
+					<div class="card">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">Statistic</span>
+						</nav>
+						<table id="statistic" class="table-sm">
+							
+						</table>
+					</div>
+				</div>
+				<div class="col">
+					<!-- Statistic chart -->
+					<div class="card" style="width: 98.5%; height:38vh">
+						<nav class="navbar navbar-dark navbar-card">
+							<span class="navbar-brand mb-0 h1">Chart</span>
+						</nav>
+						<canvas id="chart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script src="src/game.js"></script>
+	</body>
+</html>
