@@ -80,13 +80,13 @@ function onHouseEdgeChange(input)
 function onBalanceChange(input)
 {
 	if (input.value < config.minBalance) input.value = parseFloat(config.minBalance).toFixed(8);
-    if (input.value > config.maxBalance) input.value = parseFloat(config.maxBalance).toFixed(8);
+	if (input.value > config.maxBalance) input.value = parseFloat(config.maxBalance).toFixed(8);
 }
 
 function onBetsizeChange(input)
 {
 	if (input.value < config.minBetsize) input.value = parseFloat(config.minBetsize).toFixed(8);
-    if (input.value > config.maxBetsize) input.value = parseFloat(config.maxBetsize).toFixed(8);
+	if (input.value > config.maxBetsize) input.value = parseFloat(config.maxBetsize).toFixed(8);
 }
 
 function onPayoutChange(input)
@@ -104,25 +104,25 @@ function onPayoutChange(input)
 function onIncDecBetChange(input)
 {
 	if (input.value < config.minIncDecBet) input.value = config.minIncDecBet;
-    if (input.value > config.maxIncDecBet) input.value = config.maxIncDecBet;
+	if (input.value > config.maxIncDecBet) input.value = config.maxIncDecBet;
 }
 
 function onNumRollsChange(input)
 {
 	if (input.value < config.minRolls) input.value = config.minRolls;
-    if (input.value > config.maxRolls) input.value = config.maxRolls;
+	if (input.value > config.maxRolls) input.value = config.maxRolls;
 }
 
 function onStopIfBalHigherLowerChange(input)
 {
 	if (input.value < config.minStopBal) input.value = config.minStopBal;
-    if (input.value > config.maxStopBal) input.value = config.maxStopBal;
+	if (input.value > config.maxStopBal) input.value = config.maxStopBal;
 }
 
 function onMaxBetsizeChange(input)
 {
 	if (input.value < config.minMaxBetsize) input.value = config.minMaxBetsize;
-    if (input.value > config.maxMaxBetsize) input.value = config.maxMaxBetsize;
+	if (input.value > config.maxMaxBetsize) input.value = config.maxMaxBetsize;
 }
 
 
@@ -409,7 +409,7 @@ class GameHandler
 			// Configuration options
 			options: {
 				responsive: true,
-    			maintainAspectRatio: false
+				maintainAspectRatio: false
 			}
 		});
 		
