@@ -3,20 +3,17 @@ body {
 	background-color: rgb(228, 219, 203);
 }
 
-.navbar
-{
+.navbar {
 	background-color: #4d423c;
 	
 }
 
-.navbar-input
-{
+.navbar-input {
 	margin-left: 0.4rem;
 	margin-right: 1.2rem;
 }
 
-.navbar-card
-{
+.navbar-card {
 	border-radius: 5px;
 }
 
