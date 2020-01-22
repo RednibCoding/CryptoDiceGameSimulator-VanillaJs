@@ -25,7 +25,7 @@ let dom = {
 	rollunder:						"towin_roll_under_val",
 	// Limit
 	numRolls:						"limit_num_rolls_val",
-	balHigher:						"limit_stop_if_bal_heigher_val",
+	balHigher:						"limit_stop_if_bal_higher_val",
 	balLower:						"limit_stop_if_bal_lower_val",
 	maxBetsize:						"limit_max_bet_size_val",
 }
@@ -269,7 +269,7 @@ class GameHandler
 			}
 			if(balance > stopBalHigher)
 			{
-				raiseAlert("Stopped: Balance is heigher than limit.", dom.alertPosition);
+				raiseAlert("Stopped: Balance is higher than limit.", dom.alertPosition);
 				break;
 			}
 			if(balance < stopBalLower)
